@@ -1,26 +1,35 @@
 // main.js - Script for Nike Shoes Store
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Product quantity selector
     const quantityInput = document.getElementById('quantity');
-    if (quantityInput) {
-        document.getElementById('increase-quantity').addEventListener('click', function() {
-            const currentVal = parseInt(quantityInput.value);
-            const maxVal = parseInt(quantityInput.getAttribute('max'));
+    const increaseBtn = document.getElementById('increase-quantity');
+    const decreaseBtn = document.getElementById('decrease-quantity');
+
+    if (quantityInput && increaseBtn && decreaseBtn) {
+        // Видаляємо попередні обробники, клонуючи кнопки
+        increaseBtn.replaceWith(increaseBtn.cloneNode(true));
+        decreaseBtn.replaceWith(decreaseBtn.cloneNode(true));
+
+        // Отримуємо нові посилання після клонування
+        const newIncreaseBtn = document.getElementById('increase-quantity');
+        const newDecreaseBtn = document.getElementById('decrease-quantity');
+
+        newIncreaseBtn.addEventListener('click', function() {
+            const currentVal = parseInt(quantityInput.value) || 1;
+            const maxVal = parseInt(quantityInput.getAttribute('max')) || 10;
             if (currentVal < maxVal) {
                 quantityInput.value = currentVal + 1;
             }
         });
 
-        document.getElementById('decrease-quantity').addEventListener('click', function() {
-            const currentVal = parseInt(quantityInput.value);
-            const minVal = parseInt(quantityInput.getAttribute('min'));
+        newDecreaseBtn.addEventListener('click', function() {
+            const currentVal = parseInt(quantityInput.value) || 1;
+            const minVal = parseInt(quantityInput.getAttribute('min')) || 1;
             if (currentVal > minVal) {
                 quantityInput.value = currentVal - 1;
             }
         });
 
-        // Ensure quantity is within bounds when manually changed
         quantityInput.addEventListener('change', function() {
             const currentVal = parseInt(quantityInput.value) || 1;
             const minVal = parseInt(quantityInput.getAttribute('min'));
@@ -53,7 +62,26 @@ document.addEventListener('DOMContentLoaded', function() {
             animateCartIcon();
         });
     }
-    
+    // Buy now button
+     const buyNowBtn = document.getElementById('buy-now');
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener('click', function() {
+            const selectedSize = document.querySelector('input[name="size"]:checked');
+            const cartErrorAlert = document.getElementById('cart-error');
+            if (cartErrorAlert) cartErrorAlert.classList.add('d-none');
+            if (!selectedSize) {
+                if (cartErrorAlert) {
+                    cartErrorAlert.textContent = 'Будь ласка, оберіть розмір';
+                    cartErrorAlert.classList.remove('d-none');
+                } else {
+                    alert('Будь ласка, оберіть розмір');
+                }
+                return;
+            }
+            
+            window.location.href = "/checkout/";
+        });
+    }
     // Product image gallery (if implemented)
     const productThumbnails = document.querySelectorAll('.product-thumbnail');
     if (productThumbnails.length > 0) {

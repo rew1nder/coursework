@@ -69,13 +69,18 @@
                         <div class="mb-4">
                             <h6 class="filter-heading">Розмір</h6>
                             <select class="form-select" name="size">
-                                <option value="">Виберіть розмір</option>
-                                {% for i in "789" %}
-                                    <option value="{{ i }}" {% if current_size == i %}selected{% endif %}>{{ i }}</option>
-                                {% endfor %}
-                                {% for i in "9.5 10 10.5 11 11.5 12 13".split %}
-                                    <option value="{{ i }}" {% if current_size == i %}selected{% endif %}>{{ i }}</option>
-                                {% endfor %}
+                              <option value="">Виберіть розмір</option>
+                                <option value="7.0" {% if current_size == "7.0" %}selected{% endif %}>7.0</option>
+                                <option value="7.5" {% if current_size == "7.5" %}selected{% endif %}>7.5</option>
+                                <option value="8.0" {% if current_size == "8.0" %}selected{% endif %}>8.0</option>
+                                <option value="8.5" {% if current_size == "8.5" %}selected{% endif %}>8.5</option>
+                                <option value="9.0" {% if current_size == "9.0" %}selected{% endif %}>9.0</option>
+                                <option value="9.5" {% if current_size == "9.5" %}selected{% endif %}>9.5</option>
+                                <option value="10.0" {% if current_size == "10.0" %}selected{% endif %}>10.0</option>
+                                <option value="10.5" {% if current_size == "10.5" %}selected{% endif %}>10.5</option>
+                                <option value="11.0" {% if current_size == "11.0" %}selected{% endif %}>11.0</option>
+                                <option value="11.5" {% if current_size == "11.5" %}selected{% endif %}>11.5</option>
+                                <option value="12.0" {% if current_size == "12.0" %}selected{% endif %}>12.0</option>
                             </select>
                         </div>
 

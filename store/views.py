@@ -44,6 +44,14 @@ def product_list(request, category_slug=None):
     # Apply size filter
     if size:
         products = products.filter(sizes__size=size)
+     # Sorting
+    sort = request.GET.get('sort')
+    if sort == 'price_asc':
+        products = products.order_by('price')
+    elif sort == 'price_desc':
+        products = products.order_by('-price')
+    elif sort == 'newest':
+        products = products.order_by('-created')
     
     context = {
         'category': category,
