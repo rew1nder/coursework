@@ -73,7 +73,7 @@
                                 {% for i in "789" %}
                                     <option value="{{ i }}" {% if current_size == i %}selected{% endif %}>{{ i }}</option>
                                 {% endfor %}
-                                {% for i in "9.5,10,10.5,11,11.5,12,13"|split:"," %}
+                                {% for i in "9.5 10 10.5 11 11.5 12 13".split %}
                                     <option value="{{ i }}" {% if current_size == i %}selected{% endif %}>{{ i }}</option>
                                 {% endfor %}
                             </select>

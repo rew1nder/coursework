@@ -1,8 +1,42 @@
 {
-  "timeline_index": 1,
-  "planner": {},
+  "timeline_index": 18,
+  "planner": {
+    "Team Leader": {
+      "1": {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "Implement the requested changes to the e-commerce project: 1) Change carousel control colors to black, 2) Add Orders table in admin, 3) Fix 'split' filter error in product_list.html, 4) Add wishlist button next to cart button",
+        "task_type": "general",
+        "code": "",
+        "result": "",
+        "is_success": false,
+        "is_finished": false,
+        "assignee": "Alex",
+        "start_at": 1747078440.6824489
+      },
+      "current_task_id": "1"
+    }
+  },
   "gallery_last_file": {},
-  "timeline_status": {},
+  "timeline_status": {
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "16": 1,
+    "17": 1,
+    "18": 1
+  },
   "preview_servers": {},
   "deploy": {}
 }

@@ -115,6 +115,18 @@ a:hover {
     overflow: hidden;
 }
 
+/* Carousel Controls Color */
+.carousel-control-next,
+.carousel-control-prev {
+    color: black;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
 /* Size selector */
 .size-selector {
     display: flex;

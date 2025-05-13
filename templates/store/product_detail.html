@@ -26,8 +26,11 @@
         const decreaseBtn = document.getElementById('decrease-quantity');
         const increaseBtn = document.getElementById('increase-quantity');
         const addToCartBtn = document.getElementById('add-to-cart');
-        const errorAlert = document.getElementById('cart-error');
-        const successAlert = document.getElementById('cart-success');
+        const addToWishlistBtn = document.getElementById('add-to-wishlist');
+        const cartErrorAlert = document.getElementById('cart-error');
+        const cartSuccessAlert = document.getElementById('cart-success');
+        const wishlistErrorAlert = document.getElementById('wishlist-error');
+        const wishlistSuccessAlert = document.getElementById('wishlist-success');
 
         // Handle decrease quantity
         decreaseBtn.addEventListener('click', function() {
@@ -65,22 +68,24 @@
         if (addToCartBtn) {
             addToCartBtn.addEventListener('click', function() {
                 // Hide previous alerts
-                errorAlert.classList.add('d-none');
-                successAlert.classList.add('d-none');
+                cartErrorAlert.classList.add('d-none');
+                cartSuccessAlert.classList.add('d-none');
+                wishlistErrorAlert.classList.add('d-none');
+                wishlistSuccessAlert.classList.add('d-none');
                 
                 // Get selected size
                 const selectedSize = document.querySelector('input[name="size"]:checked');
                 if (!selectedSize) {
-                    errorAlert.textContent = 'Будь ласка, виберіть розмір';
-                    errorAlert.classList.remove('d-none');
+                    cartErrorAlert.textContent = 'Будь ласка, виберіть розмір';
+                    cartErrorAlert.classList.remove('d-none');
                     return;
                 }
                 
                 // Get quantity
                 const quantity = parseInt(quantityInput.value);
                 if (isNaN(quantity) || quantity < 1) {
-                    errorAlert.textContent = 'Будь ласка, вкажіть кількість';
-                    errorAlert.classList.remove('d-none');
+                    cartErrorAlert.textContent = 'Будь ласка, вкажіть кількість';
+                    cartErrorAlert.classList.remove('d-none');
                     return;
                 }
                 
@@ -104,7 +109,7 @@
                 .then(data => {
                     if (data.success) {
                         // Show success message
-                        successAlert.classList.remove('d-none');
+                        cartSuccessAlert.classList.remove('d-none');
                         
                         // Update cart count in navbar
                         const cartCount = document.querySelector('.cart-count');
@@ -112,15 +117,43 @@
                             cartCount.textContent = data.cart_items_count;
                         }
                     } else if (data.error) {
-                        errorAlert.textContent = data.error;
-                        errorAlert.classList.remove('d-none');
+                        cartErrorAlert.textContent = data.error;
+                        cartErrorAlert.classList.remove('d-none');
                     }
                 })
                 .catch(error => {
                     console.error('Error adding to cart:', error);
-                    errorAlert.textContent = 'Помилка додавання товару до кошика';
-                    errorAlert.classList.remove('d-none');
+                    cartErrorAlert.textContent = 'Помилка додавання товару до кошика';
+                    cartErrorAlert.classList.remove('d-none');
                 });
+            });
+        }
+        
+        // Add to wishlist handling
+        if (addToWishlistBtn) {
+            addToWishlistBtn.addEventListener('click', function() {
+                // Hide previous alerts
+                cartErrorAlert.classList.add('d-none');
+                cartSuccessAlert.classList.add('d-none');
+                wishlistErrorAlert.classList.add('d-none');
+                wishlistSuccessAlert.classList.add('d-none');
+                
+                // Get selected size
+                const selectedSize = document.querySelector('input[name="size"]:checked');
+                if (!selectedSize) {
+                    wishlistErrorAlert.textContent = 'Будь ласка, виберіть розмір';
+                    wishlistErrorAlert.classList.remove('d-none');
+                    return;
+                }
+                
+                // For demonstration purposes, we'll just show a success message
+                // In a real app, you would send a request to the server to add to wishlist
+                wishlistSuccessAlert.classList.remove('d-none');
+                
+                // After 3 seconds, hide the success message
+                setTimeout(function() {
+                    wishlistSuccessAlert.classList.add('d-none');
+                }, 3000);
             });
         }
     });
@@ -242,7 +275,7 @@
                     <button type="button" class="btn btn-dark btn-lg add-to-cart-btn" id="add-to-cart">
                         <i class="fas fa-shopping-cart me-2"></i>Додати до кошика
                     </button>
-                    <button type="button" class="btn btn-outline-dark btn-lg">
+                    <button type="button" class="btn btn-outline-dark btn-lg" id="add-to-wishlist">
                         <i class="far fa-heart me-2"></i>Додати до списку бажань
                     </button>
                 </div>
@@ -252,6 +285,10 @@
                     <div class="mt-2">
                         <a href="{% url 'store:cart_view' %}" class="btn btn-sm btn-dark">Перейти до кошика</a>
                     </div>
+                </div>
+                <div class="alert alert-danger mt-2 d-none" id="wishlist-error"></div>
+                <div class="alert alert-success mt-2 d-none" id="wishlist-success">
+                    <i class="fas fa-check-circle me-2"></i>Товар додано до списку бажань!
                 </div>
             </form>
             
